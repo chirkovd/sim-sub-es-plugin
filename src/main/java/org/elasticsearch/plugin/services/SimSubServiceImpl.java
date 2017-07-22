@@ -1,5 +1,10 @@
 package org.elasticsearch.plugin.services;
 
+import org.elasticsearch.plugin.utils.TokenizerType;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * Copyright (c) 2017, DIPE Systems. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
@@ -13,28 +18,47 @@ package org.elasticsearch.plugin.services;
  */
 public class SimSubServiceImpl implements SimSubService {
 
+    private static final int FIRST_CODE = 48;
+    private static final int LAST_CODE = 90;
+
     @Override
     public String highlight(String target, String query) {
-        return null;
+        if (query.contains(target)) {
+            return query.replace(target, "<hi>".concat(target).concat("</hi>"));
+        } else {
+            return target;
+        }
     }
 
     @Override
-    public String fingerprints(String target, String type) {
-        return null;
+    public String fingerprints(String target, TokenizerType type) {
+        Set<Character> charsSet = target.chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+        StringBuilder fingerprint = new StringBuilder();
+        for (char i = FIRST_CODE; i <= LAST_CODE; i++) {
+            fingerprint.append(charsSet.contains(i) ? "1" : "0");
+        }
+        return fingerprint.toString();
     }
 
     @Override
     public Object loadQuery(String queryValue) {
-        return null;
+        return queryValue;
     }
 
     @Override
     public Object countSimilarity(Object targetValue, Object query, String simType) {
-        return null;
+        Set<Character> targetSet = targetValue.toString().chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+        Set<Character> querySet = query.toString().chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+
+        int sum = targetSet.size() + querySet.size();
+        querySet.retainAll(targetSet);
+
+        //similarity by tanimoto
+        return querySet.size()/(sum - querySet.size());
     }
 
     @Override
     public boolean isSubstructure(Object targetValue, Object query) {
-        return false;
+        return !(targetValue == null || query == null) && query.toString().contains(targetValue.toString());
     }
 }

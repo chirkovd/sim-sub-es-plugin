@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public abstract class AbstractSimSubTokenizer extends Tokenizer {
 
-    private final String type;
+    private final TokenizerType type;
     private final SimSubService simSubService;
 
     private boolean done;
@@ -36,7 +36,7 @@ public abstract class AbstractSimSubTokenizer extends Tokenizer {
     private final TypeAttribute typeAttribute = addAttribute(TypeAttribute.class);
 
     protected AbstractSimSubTokenizer(TokenizerType type, SimSubService simSubService) {
-        this.type = type.getType();
+        this.type = type;
         this.simSubService = simSubService;
         this.done = false;
     }

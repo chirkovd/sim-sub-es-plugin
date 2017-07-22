@@ -1,5 +1,7 @@
 package org.elasticsearch.plugin.services;
 
+import org.elasticsearch.plugin.utils.TokenizerType;
+
 /**
  * Project: sim-sub-es-plugin
  * Description:
@@ -12,7 +14,7 @@ public interface SimSubService {
 
     String highlight(String target, String query);
 
-    String fingerprints(String target, String type);
+    String fingerprints(String target, TokenizerType type);
 
     Object loadQuery(String queryValue);
 

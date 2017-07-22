@@ -6,9 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Copyright (c) 2017, DIPE Systems. All rights reserved.
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * <p>
  * Project: sim-sub-es-plugin
  * Description:
  * Date: 7/22/2017
@@ -18,8 +15,8 @@ import java.util.stream.Collectors;
  */
 public class SimSubServiceImpl implements SimSubService {
 
-    private static final int FIRST_CODE = 48;
-    private static final int LAST_CODE = 90;
+    private static final int FIRST_CODE = 0;
+    private static final int LAST_CODE = 255;
 
     @Override
     public String highlight(String target, String query) {
@@ -32,9 +29,9 @@ public class SimSubServiceImpl implements SimSubService {
 
     @Override
     public String fingerprints(String target, TokenizerType type) {
-        Set<Character> charsSet = target.chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+        Set<Integer> charsSet = target.chars().mapToObj(Integer::valueOf).collect(Collectors.toSet());
         StringBuilder fingerprint = new StringBuilder();
-        for (char i = FIRST_CODE; i <= LAST_CODE; i++) {
+        for (int i = FIRST_CODE; i <= LAST_CODE; i++) {
             fingerprint.append(charsSet.contains(i) ? "1" : "0");
         }
         return fingerprint.toString();

@@ -7,6 +7,14 @@ import org.elasticsearch.script.NativeScriptFactory;
 
 import java.util.Map;
 
+/**
+ * Project: sim-sub-es-plugin
+ * Description:
+ * Date: 7/22/2017
+ *
+ * @author Dmitriy_Chirkov
+ * @since 1.8
+ */
 public class SubstructureScriptFactory implements NativeScriptFactory {
 
     public static final String QUERY = "query";

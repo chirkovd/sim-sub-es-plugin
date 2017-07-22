@@ -12,7 +12,7 @@ import org.elasticsearch.plugin.utils.TokenizerType;
  * @author Dmitriy_Chirkov
  * @since 1.8
  */
-public class SubstructureTokenizer extends AbstractSimSubTokenizer {
+public final class SubstructureTokenizer extends AbstractSimSubTokenizer {
 
     public static final String NAME = "sim-sub-substructure";
 

@@ -22,6 +22,8 @@ public class SimSubHighlighter implements Highlighter {
 
     public static final String NAME = "sim-sub-highlighter";
     public static final String QUERY_OPTION = "query";
+    public static final String START_TAG = "sTag";
+    public static final String END_TAG = "eTag";
 
     private final SimSubService simSubService;
 
@@ -35,10 +37,12 @@ public class SimSubHighlighter implements Highlighter {
         Map<String, Object> options = fieldOptions.options();
         if (options != null && options.containsKey(QUERY_OPTION)) {
             String query = (String) options.get(QUERY_OPTION);
+            String startTag = (String) options.getOrDefault(START_TAG, "<em>");
+            String endTag = (String) options.getOrDefault(END_TAG, "</em>");
 
             Map<String, Object> sourceAsMap = highlighterContext.hitContext.hit().getSourceAsMap();
             String target = (String) sourceAsMap.get(highlighterContext.fieldName);
-            String highlightedValue = simSubService.highlight(target, query);
+            String highlightedValue = simSubService.highlight(target, query, startTag, endTag);
             if (highlightedValue != null) {
                 Text[] texts = {new Text(highlightedValue)};
                 return new HighlightField(highlighterContext.fieldName, texts);

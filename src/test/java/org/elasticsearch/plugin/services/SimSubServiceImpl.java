@@ -19,9 +19,9 @@ public class SimSubServiceImpl implements SimSubService {
     private static final int LAST_CODE = 255;
 
     @Override
-    public String highlight(String target, String query) {
+    public String highlight(String target, String query, String startTag, String endTag) {
         if (target.contains(query)) {
-            return target.replace(query, "<hi>".concat(query).concat("</hi>"));
+            return target.replace(query, startTag.concat(query).concat(endTag));
         } else {
             return target;
         }

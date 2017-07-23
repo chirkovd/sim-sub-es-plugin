@@ -171,7 +171,12 @@ public class SimSubSearchTest extends ESIntegTestCase {
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.field("item");
         highlightBuilder.highlighterType(SimSubHighlighter.NAME);
-        highlightBuilder.options(Collections.singletonMap(SimSubHighlighter.QUERY_OPTION, queryValue));
+
+        Map<String, Object> options = new HashMap<>();
+        options.put(SimSubHighlighter.QUERY_OPTION, queryValue);
+        options.put(SimSubHighlighter.START_TAG, "<hi>");
+        options.put(SimSubHighlighter.END_TAG, "</hi>");
+        highlightBuilder.options(options);
 
         /* Substructure search by tokenizer */
         QueryBuilder query = QueryBuilders.matchQuery("item.sub", queryValue).operator(Operator.AND);

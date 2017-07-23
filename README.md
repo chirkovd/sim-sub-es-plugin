@@ -63,7 +63,12 @@ Run different searches by java native library:
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.field("item");
         highlightBuilder.highlighterType("sim-sub-highlighter");
-        highlightBuilder.options(Collections.singletonMap("query", queryValue));
+        
+        Map<String, Object> options = new HashMap<>();
+        options.put("query", queryValue);
+        options.put("sTag", "<hi>");
+        options.put("eTag", "</hi>");
+        highlightBuilder.options(options);
 
         requestBuilder.highlighter(highlightBuilder);
 ```

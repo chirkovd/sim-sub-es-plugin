@@ -12,7 +12,7 @@ import org.elasticsearch.plugin.utils.TokenizerType;
  */
 public interface SimSubService {
 
-    String highlight(String target, String query);
+    String highlight(String target, String query, String startTag, String endTag);
 
     String fingerprints(String target, TokenizerType type);
 

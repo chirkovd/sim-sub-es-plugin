@@ -1,0 +1,26 @@
+{
+  "analysis": {
+    "analyzer": {
+      "ss_sub_analyzer": {
+        "type": "custom",
+        "tokenizer": "sim-sub-substructure",
+        "filter": [
+          "short"
+        ]
+      },
+      "ss_sim_analyzer": {
+        "type": "custom",
+        "tokenizer": "sim-sub-similarity",
+        "filter": [
+          "short"
+        ]
+      }
+    },
+    "filter": {
+      "short": {
+        "type": "length",
+        "min": 1
+      }
+    }
+  }
+}

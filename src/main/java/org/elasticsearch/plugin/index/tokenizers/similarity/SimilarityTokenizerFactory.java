@@ -2,11 +2,9 @@ package org.elasticsearch.plugin.index.tokenizers.similarity;
 
 import org.apache.lucene.analysis.Tokenizer;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.index.analysis.AbstractTokenizerFactory;
 import org.elasticsearch.plugin.services.SimSubService;
-import org.elasticsearch.plugin.services.SimSubServiceFactory;
 
 /**
  * Project: sim-sub-es-plugin
@@ -20,10 +18,10 @@ public class SimilarityTokenizerFactory extends AbstractTokenizerFactory {
 
     private final SimSubService simSubService;
 
-    public SimilarityTokenizerFactory(IndexSettings indexSettings, Environment environment,
+    public SimilarityTokenizerFactory(IndexSettings indexSettings, SimSubService simSubService,
                                       String name, Settings settings) {
         super(indexSettings, name, settings);
-        this.simSubService = SimSubServiceFactory.getInstance();
+        this.simSubService = simSubService;
     }
 
     @Override

@@ -1,0 +1,25 @@
+{
+  "_all": {
+    "enabled": true
+  },
+  "properties": {
+    "id": {
+      "type": "long"
+    },
+    "item": {
+      "type": "text",
+      "fields": {
+        "sub": {
+          "type": "text",
+          "analyzer": "ss_sub_analyzer",
+          "search_analyzer": "ss_sub_analyzer"
+        },
+        "sim": {
+          "type": "text",
+          "analyzer": "ss_sim_analyzer",
+          "search_analyzer": "ss_sim_analyzer"
+        }
+      }
+    }
+  }
+}

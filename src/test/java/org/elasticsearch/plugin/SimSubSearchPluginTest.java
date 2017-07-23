@@ -2,6 +2,7 @@ package org.elasticsearch.plugin;
 
 import org.elasticsearch.action.admin.cluster.node.info.NodeInfo;
 import org.elasticsearch.action.admin.cluster.node.info.NodesInfoResponse;
+import org.elasticsearch.plugin.services.SimSubSearchPluginStub;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.PluginInfo;
 import org.elasticsearch.test.ESIntegTestCase;
@@ -23,7 +24,7 @@ public class SimSubSearchPluginTest extends ESIntegTestCase {
 
     @Override
     protected Collection<Class<? extends Plugin>> nodePlugins() {
-        return Collections.singleton(SimSubSearchPlugin.class);
+        return Collections.singleton(SimSubSearchPluginStub.class);
     }
 
     public void testPluginIsLoaded() throws Exception {
@@ -31,7 +32,7 @@ public class SimSubSearchPluginTest extends ESIntegTestCase {
         for (NodeInfo nodeInfo : response.getNodes()) {
             boolean pluginFound = false;
             for (PluginInfo pluginInfo : nodeInfo.getPlugins().getPluginInfos()) {
-                if (pluginInfo.getName().equals(SimSubSearchPlugin.class.getName())) {
+                if (pluginInfo.getName().equals(SimSubSearchPluginStub.class.getName())) {
                     pluginFound = true;
                     break;
                 }

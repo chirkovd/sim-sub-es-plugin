@@ -20,8 +20,8 @@ public class SimSubServiceImpl implements SimSubService {
 
     @Override
     public String highlight(String target, String query) {
-        if (query.contains(target)) {
-            return query.replace(target, "<hi>".concat(target).concat("</hi>"));
+        if (target.contains(query)) {
+            return target.replace(query, "<hi>".concat(query).concat("</hi>"));
         } else {
             return target;
         }
@@ -44,18 +44,18 @@ public class SimSubServiceImpl implements SimSubService {
 
     @Override
     public Object countSimilarity(Object targetValue, Object query, String simType) {
-        Set<Character> targetSet = targetValue.toString().chars().mapToObj(e->(char)e).collect(Collectors.toSet());
-        Set<Character> querySet = query.toString().chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+        Set<Character> targetSet = targetValue.toString().chars().mapToObj(e -> (char) e).collect(Collectors.toSet());
+        Set<Character> querySet = query.toString().chars().mapToObj(e -> (char) e).collect(Collectors.toSet());
 
         int sum = targetSet.size() + querySet.size();
         querySet.retainAll(targetSet);
 
         //similarity by tanimoto
-        return querySet.size()/(sum - querySet.size());
+        return ((float) querySet.size() / (sum - querySet.size())) * 100F;
     }
 
     @Override
     public boolean isSubstructure(Object targetValue, Object query) {
-        return !(targetValue == null || query == null) && query.toString().contains(targetValue.toString());
+        return !(targetValue == null || query == null) && targetValue.toString().contains(query.toString());
     }
 }

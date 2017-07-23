@@ -1,7 +1,7 @@
 package org.elasticsearch.plugin.index.scripts.similarity;
 
 import org.elasticsearch.common.Nullable;
-import org.elasticsearch.plugin.services.SimSubServiceFactory;
+import org.elasticsearch.plugin.services.SimSubService;
 import org.elasticsearch.script.ExecutableScript;
 import org.elasticsearch.script.NativeScriptFactory;
 
@@ -21,12 +21,18 @@ public class SimilarityScriptFactory implements NativeScriptFactory {
     public static final String QUERY = "query";
     public static final String FIELD = "field";
 
+    private final SimSubService simSubService;
+
+    public SimilarityScriptFactory(SimSubService simSubService) {
+        this.simSubService = simSubService;
+    }
+
     @Override
     public ExecutableScript newScript(@Nullable Map<String, Object> params) {
         String simType = (String) params.getOrDefault(TYPE, "tanimoto");
         String queryStr = (String) params.getOrDefault(QUERY, "");
         String strField = (String) params.getOrDefault(FIELD, "field");
-        return new SimilarityScript(SimSubServiceFactory.getInstance(), simType, queryStr, strField);
+        return new SimilarityScript(simSubService, simType, queryStr, strField);
     }
 
     @Override

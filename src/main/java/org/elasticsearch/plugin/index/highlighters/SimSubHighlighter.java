@@ -3,7 +3,6 @@ package org.elasticsearch.plugin.index.highlighters;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.mapper.FieldMapper;
 import org.elasticsearch.plugin.services.SimSubService;
-import org.elasticsearch.plugin.services.SimSubServiceFactory;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.fetch.subphase.highlight.Highlighter;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlighterContext;
@@ -26,8 +25,8 @@ public class SimSubHighlighter implements Highlighter {
 
     private final SimSubService simSubService;
 
-    public SimSubHighlighter() {
-        this.simSubService = SimSubServiceFactory.getInstance();
+    public SimSubHighlighter(SimSubService simSubService) {
+        this.simSubService = simSubService;
     }
 
     @Override

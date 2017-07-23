@@ -4,6 +4,7 @@ import com.carrotsearch.randomizedtesting.RandomizedRunner;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequest;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse;
 import org.elasticsearch.plugin.index.tokenizers.similarity.SimilarityTokenizer;
+import org.elasticsearch.plugin.services.SimSubSearchPluginStub;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.junit.Assert;
@@ -32,7 +33,7 @@ public class SimSubAnalyzerTest extends ESIntegTestCase {
 
     @Override
     protected Collection<Class<? extends Plugin>> nodePlugins() {
-        return Collections.singleton(SimSubSearchPlugin.class);
+        return Collections.singleton(SimSubSearchPluginStub.class);
     }
 
     @Test

@@ -2,8 +2,8 @@
 Elasticsearch Plugin for similarity and substructure searches by fingerprints
 
 Steps to implement current plugin:
-# Create implementation of SimSubService and SimSubServiceFactory
-# Build plugin jar and install it to elasticsearch instance
+1. Create implementation of SimSubService and SimSubServiceFactory
+2. Build plugin jar and install it to elasticsearch instance
 
 Run different searches by java native library:
 1) analyze any terms by defined analyzers
